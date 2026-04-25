@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team - Echocardiography System</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="favicon.png">
+    <style>
+        /* Prevent horizontal overflow */
+        html, body {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+
+        /* Team Page Specific Styles */
+        .team-hero {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .team-hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+
+        .team-hero p {
+            font-size: 1.125rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .team-section {
+            padding: 4rem 2rem;
+            background: var(--gray-50);
+        }
+
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .team-card-image {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, var(--primary-red-light), var(--accent-red));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-card-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .team-card-avatar {
+            width: 120px;
+            height: 120px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            z-index: 1;
+        }
+
+        .team-card-content {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .team-card-content h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 0.25rem;
+        }
+
+        .team-card-role {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-red), var(--accent-red));
+            color: var(--white);
+            padding: 0.375rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .team-card-description {
+            color: var(--gray-600);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+        }
+
+        .team-card-contact {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .team-card-contact a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--gray-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-600);
+            transition: all 0.3s ease;
+        }
+
+        .team-card-contact a:hover {
+            background: var(--primary-red);
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        .team-card-contact svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Decorative elements */
+        .team-decoration {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: var(--primary-red);
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        .team-decoration-1 {
+            top: -100px;
+            left: -100px;
+        }
+
+        .team-decoration-2 {
+            bottom: -100px;
+            right: -100px;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .team-hero {
+                padding: 6rem 1rem 3rem;
+            }
+
+            .team-hero h1 {
+                font-size: 1.75rem;
+            }
+
+            .team-hero p {
+                font-size: 0.9375rem;
+            }
+
+            .team-section {
+                padding: 2rem 1rem;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .team-card-image {
+                height: 220px;
+            }
+
+            .team-card-avatar {
+                width: 90px;
+                height: 90px;
+                font-size: 2rem;
+            }
+
+            .team-decoration {
+                width: 120px;
+                height: 120px;
+            }
+
+            .team-decoration-1 {
+                top: -60px;
+                left: -60px;
+            }
+
+            .team-decoration-2 {
+                bottom: -60px;
+                right: -60px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .team-hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .team-card-content h3 {
+                font-size: 1.125rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+                <span>Echocardiography System</span>
+            </a>
+            <ul class="navbar-menu" id="navbarMenu">
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#availability">Availability</a></li>
+                <li><a href="../index.html#location">Location</a></li>
+                <li><a href="team.html">Our Team</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+                <li><a href="login.html" class="btn-login">Login</a></li>
+            </ul>
+            <button class="navbar-toggle" id="navbarToggle" onclick="toggleMobileMenu()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24" height="24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="team-hero">
+        <div class="team-decoration team-decoration-1"></div>
+        <div class="team-decoration team-decoration-2"></div>
+        <h1>Meet Our Expert Team</h1>
+        <p>Dedicated healthcare professionals committed to delivering exceptional cardiac care with compassion and expertise</p>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="team-container">
+            <div class="team-grid">
+                <!-- Team Member 1 -->
+                <div class="team-card">
+                    <div class="team-card-image">
+                        <div class="team-card-avatar">UR</div>
+                    </div>
+                    <div class="team-card-content">
+                        <span class="team-card-role">TECHNOLOGIST</span>
+                        <h3>Umme Rubab</h3>
+                        <div class="team-card-contact">
+                            <a href="mailto:sarah.j@ecg.com" title="Email">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </a>
+                            <a href="#" title="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                    <rect x="2" y="9" width="4" height="12" />
+                                    <circle cx="4" cy="4" r="2" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="team-card">
+                    <div class="team-card-image">
+                        <div class="team-card-avatar">MS</div>
+                    </div>
+                    <div class="team-card-content">
+                        <span class="team-card-role">TECHNOLOGIST</span>
+                        <h3>Maryam Sadiqa</h3>
+                        <div class="team-card-contact">
+                            <a href="mailto:michael.c@ecg.com" title="Email">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </a>
+                            <a href="#" title="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                    <rect x="2" y="9" width="4" height="12" />
+                                    <circle cx="4" cy="4" r="2" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="team-card">
+                    <div class="team-card-image">
+                        <div class="team-card-avatar">MS</div>
+                    </div>
+                    <div class="team-card-content">
+                        <span class="team-card-role">TECHNOLOGIST</span>
+                        <h3>Mehwish shahzad</h3>
+                        
+                        <div class="team-card-contact">
+                            <a href="mailto:emily.r@ecg.com" title="Email">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </a>
+                            <a href="#" title="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                    <rect x="2" y="9" width="4" height="12" />
+                                    <circle cx="4" cy="4" r="2" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 4 -->
+                <div class="team-card">
+                    <div class="team-card-image">
+                        <div class="team-card-avatar">FN</div>
+                    </div>
+                    <div class="team-card-content">
+                        <span class="team-card-role">TECHNOLOGIST</span>
+                        <h3>Farwa Nawaz</h3>
+                        <div class="team-card-contact">
+                            <a href="mailto:david.p@ecg.com" title="Email">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </a>
+                            <a href="#" title="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                    <rect x="2" y="9" width="4" height="12" />
+                                    <circle cx="4" cy="4" r="2" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 5 -->
+                <div class="team-card">
+                    <div class="team-card-image">
+                        <div class="team-card-avatar">SA</div>
+                    </div>
+                    <div class="team-card-content">
+                        <span class="team-card-role">TECHNOLOGIST</span>
+                        <h3>Sidra Ahmed</h3>
+                        <div class="team-card-contact">
+                            <a href="mailto:alex.w@ecg.com" title="Email">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </a>
+                            <a href="#" title="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                    <rect x="2" y="9" width="4" height="12" />
+                                    <circle cx="4" cy="4" r="2" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Echocardiography System</h4>
+                    <p>Providing advanced cardiac diagnostic services to rural and underserved communities. Quality healthcare brought to your doorstep.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="../index.html#about">About Us</a>
+                        <a href="../index.html#availability">Availability</a>
+                        <a href="../index.html#location">Locations</a>
+                        <a href="team.html">Our Team</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <div class="footer-links">
+                        <a href="../index.html#">Echocardiogram</a>
+                        <a href="../index.html#">Cardiac Consultation</a>
+                        <a href="../index.html#">Home Visits</a>
+                        <a href="../index.html#">Digital Reports</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: info@ecgsystem.com<br>
+                    Phone: +1 800-123-4567<br>
+                    Hours: Mon-Sat 9AM - 6PM</p>
+                </div>
+                
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Echocardiography System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('navbarMenu');
+            menu.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
